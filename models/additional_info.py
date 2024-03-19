@@ -1,4 +1,3 @@
-import enum
 import os
 
 from libcloud.storage.drivers.local import LocalStorageDriver
@@ -10,17 +9,7 @@ from sqlalchemy_file import FileField
 from sqlalchemy_file.storage import StorageManager
 
 from .base import Base
-
-
-class RecruiterExperience(str, enum.Enum):
-    JUNIOR = "1-3 года"
-    MIDDLE = "3-6 лет"
-    SENIOR = "От 6 лет"
-
-
-class ResumeFormat(str, enum.Enum):
-    WITHOUT_INTERVIEW = "Резюме без предварительного собеседования"
-    WITH_INTERVIEW = "Резюме кандидатов, с которыми проведено интервью, с комментариями по кандидату"
+from .enums import RecruiterExperience, ResumeFormat
 
 
 class AdditionalInfo(Base):
