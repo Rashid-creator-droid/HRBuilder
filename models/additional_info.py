@@ -10,7 +10,7 @@ from .enums import RecruiterExperience, ResumeFormat
 
 class AdditionalInfo(Base):
     recruiter_experience: Mapped[RecruiterExperience]
-    recruiter_responsibilities: Mapped[list[str]] = mapped_column(
+    recruiter_responsibilities: Mapped[list[str] | None] = mapped_column(
         ARRAY(String)
     )
     resume_format: Mapped[ResumeFormat]
@@ -33,4 +33,4 @@ class AdditionalInfo(Base):
         default="",
         server_default="",
     )
-    additional_files: Mapped[FileField]
+    additional_files: Mapped[FileField | None]
