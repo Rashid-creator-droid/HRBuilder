@@ -19,8 +19,35 @@
 
 ### Версионирование.
 
-# Установка проекта.
-
+## Запуск проекта посредством Docker.
+### Клонировать репозиторий и перейти в него в командной строке.
+```
+https://github.com/voronovdaniil/HRBuilder.git
+``` 
+- Перейти в ветку develop.
+```
+git checkout develop
+```
+- Перейти в папку infra.
+```
+cd infra
+```
+- Запустить  docker-compose
+```
+docker-compose up -d
+```
+- Создать миграции
+```
+docker-compose exec backend alembic revision --autogenerate -m "Migration name"
+```
+- Применить миграции
+```
+docker-compose exec backend alembic upgrade head
+```
+# Документация API первой версии будет доступна по адресу.
+```
+http://localhost/docs/
+``` 
 ## Установка проекта из репозитория  GitHub.
 ### Установить Python 3.11
 - Для Windows https://www.python.org/downloads/
@@ -34,6 +61,7 @@ sudo apt install python3.11
 ```
 https://github.com/voronovdaniil/HRBuilder.git
 ``` 
+## Запуск проекта.
 ###  Развернуть виртуальное окружение.
 ```
 python -m venv venv
@@ -77,8 +105,3 @@ DB_PORT=5432
 SECRET=moi_secret123123123123
 ``` 
 - Запустить main.py
-
-# Документация API первой версии будет доступна по адресу.
-```
-http://localhost/docs/v1
-``` 
