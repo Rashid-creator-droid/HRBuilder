@@ -7,9 +7,11 @@ from sqlalchemy.orm import joinedload
 from api.v1.specialization.schemas import (
     SpecializationBase,
     SkillCreate,
+    ResponsibilityCreate,
 )
 from core.db_helper import db_helper
 from models import Specialization, Skill
+from models.specializations import Responsibility
 
 
 async def post_specialization(
@@ -29,6 +31,15 @@ async def post_skill(session: AsyncSession, mapped_in: SkillCreate):
     return skill
 
 
+async def post_responsibility(
+    session: AsyncSession, mapped_in: ResponsibilityCreate
+):
+    responsibility = Responsibility(**mapped_in.dict())
+    session.add(responsibility)
+    await session.commit()
+    return responsibility
+
+
 async def get_specialization(
     session: AsyncSession,
 ) -> Sequence[Specialization]:
@@ -46,7 +57,10 @@ async def specialization_by_id(
     stmt = (
         select(Specialization)
         .where(Specialization.id == specialization_id)
-        .options(joinedload(Specialization.skills))
+        .options(
+            joinedload(Specialization.skills),
+            joinedload(Specialization.responsibilities),
+        )
     )
     result = await session.execute(stmt)
     specialization = result.scalar()

@@ -7,13 +7,16 @@ from api.v1.specialization.repositories import (
     post_skill,
     get_specialization,
     specialization_by_id,
+    post_responsibility,
 )
 from api.v1.specialization.schemas import (
     SpecializationCreate,
     Specialization,
     SkillCreate,
     Skill,
-    SpecializationSkill,
+    SpecializationSkillResp,
+    ResponsibilityCreate,
+    Responsibility,
 )
 from core.db_helper import db_helper
 
@@ -22,8 +25,8 @@ router = APIRouter(prefix="/base", tags=["Специализации"])
 
 @router.get(
     "/specialization/{specialization_id}/",
-    response_model=SpecializationSkill,
-    summary="Получить специализацию",
+    response_model=SpecializationSkillResp,
+    summary="Получить специализацию с id=",
 )
 async def get_dealer_price(
     specialization: Specialization = Depends(specialization_by_id),
@@ -68,6 +71,21 @@ async def skill_create(
     session: AsyncSession = Depends(db_helper.scoped_session_dependency),
 ):
     return await post_skill(
+        session=session,
+        mapped_in=mapped_in,
+    )
+
+
+@router.post(
+    "/responsibilities",
+    response_model=Responsibility,
+    summary="Добавить обязанность",
+)
+async def responsibility_create(
+    mapped_in: ResponsibilityCreate,
+    session: AsyncSession = Depends(db_helper.scoped_session_dependency),
+):
+    return await post_responsibility(
         session=session,
         mapped_in=mapped_in,
     )

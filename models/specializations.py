@@ -13,6 +13,9 @@ class Specialization(Base):
     skills: Mapped[list["Skill"] | None] = relationship(
         back_populates="specialization"
     )
+    responsibilities: Mapped[list["Responsibility"] | None] = relationship(
+        back_populates="specialization"
+    )
 
     def __repr__(self) -> str:
         return f"SpecializationBase(id={self.id!r}, name={self.name!r})"
@@ -32,6 +35,22 @@ class Skill(Base):
 
     def __repr__(self) -> str:
         return f"Skill(id={self.id!r}, name={self.name!r})"
+
+    def __str__(self) -> str:
+        return self.name
+
+
+class Responsibility(Base):
+    name: Mapped[str] = mapped_column(String())
+    specialization_id: Mapped[int | None] = mapped_column(
+        ForeignKey("specializations.id")
+    )
+    specialization: Mapped["Specialization"] = relationship(
+        back_populates="responsibilities"
+    )
+
+    def __repr__(self) -> str:
+        return f"Responsibilities(id={self.id!r}, name={self.name!r})"
 
     def __str__(self) -> str:
         return self.name
