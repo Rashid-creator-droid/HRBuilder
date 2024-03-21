@@ -8,9 +8,11 @@ from api.v1.specialization.schemas import (
     SpecializationBase,
     SkillCreate,
     ResponsibilityCreate,
+    CityCreate,
 )
 from core.db_helper import db_helper
 from models import Specialization, Skill
+from models.cities import City
 from models.specializations import Responsibility
 
 
@@ -67,3 +69,20 @@ async def specialization_by_id(
     print(specialization)
     await session.close()
     return specialization
+
+
+async def get_cities(
+    session: AsyncSession,
+) -> Sequence[City]:
+    stmt = select(City)
+    result = await session.execute(stmt)
+    all_cities = result.scalars().all()
+    await session.close()
+    return all_cities
+
+
+async def post_city(session: AsyncSession, mapped_in: CityCreate):
+    city = City(**mapped_in.dict())
+    session.add(city)
+    await session.commit()
+    return city

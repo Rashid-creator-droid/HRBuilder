@@ -40,3 +40,15 @@ class ResponsibilityCreate(ResponsibilityBase):
 class SpecializationSkillResp(Specialization):
     skills: list[Skill] | None
     responsibilities: list[Responsibility] | None
+
+
+class CityBase(BaseModel):
+    name: str | None
+
+
+class City(CityBase):
+    id: int | None
+
+
+class CityCreate(CityBase):
+    pass
