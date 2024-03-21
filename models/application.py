@@ -41,3 +41,5 @@ class Application(Base):
     additional_info: Mapped[Optional["AdditionalInfo"]] = relationship(
         back_populates="application"
     )
+
+    is_draft: Mapped[bool] = mapped_column(default=True)
