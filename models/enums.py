@@ -16,3 +16,30 @@ class RecruiterExperience(str, Enum):
 class ResumeFormat(str, Enum):
     without_interview = "Резюме без предварительного собеседования"
     with_interview = "Резюме кандидатов, с которыми проведено интервью, с комментариями по кандидату"
+
+
+class Experience(str, Enum):
+    no_experience = "без опыта"
+    junior = "1-3 года"
+    middle = "3-6 лет"
+    senior = "От 6 лет"
+
+
+class WorkFormat(str, Enum):
+    office = "В офисе"
+    hybrid = "Гибрид"
+    remote = "Удаленка"
+
+
+class EmploymentType(str, Enum):
+    full_time = "Полная"
+    part_time = "Частичная"
+    shifrs = "По сменам"
+    rotational = "Вахтовый"
+
+
+class EmployeeRegistration(str, Enum):
+    TK = "По ТК"
+    GPH = "По ГПХ"
+    self_employed = "Самозанятый"
+    individual_entrepreneur = "Индивидуальный предприниматель"
