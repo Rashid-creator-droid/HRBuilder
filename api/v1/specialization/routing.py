@@ -8,6 +8,8 @@ from api.v1.specialization.repositories import (
     get_specialization,
     specialization_by_id,
     post_responsibility,
+    get_cities,
+    post_city,
 )
 from api.v1.specialization.schemas import (
     SpecializationCreate,
@@ -17,6 +19,8 @@ from api.v1.specialization.schemas import (
     SpecializationSkillResp,
     ResponsibilityCreate,
     Responsibility,
+    City,
+    CityCreate,
 )
 from core.db_helper import db_helper
 
@@ -32,6 +36,33 @@ async def get_dealer_price(
     specialization: Specialization = Depends(specialization_by_id),
 ):
     return specialization
+
+
+@router.get(
+    "/cities",
+    response_model=List[City],
+    summary="Города",
+)
+async def get_all_cities(
+    session: AsyncSession = Depends(db_helper.scoped_session_dependency),
+):
+    value = await get_cities(session=session)
+    return value
+
+
+@router.post(
+    "/cities",
+    response_model=City,
+    summary="Добавить город",
+)
+async def city_create(
+    mapped_in: CityCreate,
+    session: AsyncSession = Depends(db_helper.scoped_session_dependency),
+):
+    return await post_city(
+        session=session,
+        mapped_in=mapped_in,
+    )
 
 
 @router.get(
