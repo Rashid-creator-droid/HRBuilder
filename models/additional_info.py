@@ -29,13 +29,23 @@ class AdditionalInfo(Base):
         Boolean,
         default=False,
     )
-    blacklist_companies: Mapped[list[str] | None] = mapped_column(
-        ARRAY(String)
+    # blacklist_companies: Mapped[list[str] | None] = mapped_column(
+    #     ARRAY(String)
+    # )
+    # blacklist_employees: Mapped[list[str] | None] = mapped_column(
+    #     ARRAY(String)
+    # )
+    blacklist_companies: Mapped[str | None] = mapped_column(
+        Text,
+        default="",
+        server_default="",
     )
-    blacklist_employees: Mapped[list[str] | None] = mapped_column(
-        ARRAY(String)
+    blacklist_employees: Mapped[str | None] = mapped_column(
+        Text,
+        default="",
+        server_default="",
     )
-    additional_files: Mapped[FileField | None]
+    additional_files = mapped_column(FileField, nullable=True)
 
     application: Mapped["Application"] = relationship(
         back_populates="application"

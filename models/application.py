@@ -6,17 +6,17 @@ from typing import TYPE_CHECKING, Optional
 from models.base import Base
 
 if TYPE_CHECKING:
-    from models.users import User
+    # from models.users import User
     from models.vacancy import Vacancy, WorkingConditions
     from models.payment import Payment
     from models.additional_info import AdditionalInfo
 
 
 class Application(Base):
-    user_id: Mapped[int] = mapped_column(
-        ForeignKey("users.id", ondelete="CASCADE")
-    )
-    user: Mapped["User"] = relationship(back_populates="applications")
+    # user_id: Mapped[int] = mapped_column(
+    #     ForeignKey("users.id", ondelete="CASCADE")
+    # )
+    # user: Mapped["User"] = relationship(back_populates="applications")
 
     vacancy_id: Mapped[int | None] = mapped_column(ForeignKey("vacancies.id"))
     vacancy: Mapped[Optional["Vacancy"]] = relationship(
@@ -42,4 +42,4 @@ class Application(Base):
         back_populates="application"
     )
 
-    is_draft: Mapped[bool] = mapped_column(default=True)
+    is_published: Mapped[bool] = mapped_column(default=False)
