@@ -4,7 +4,12 @@ from sqlalchemy.orm import mapped_column, Mapped, relationship
 from typing import TYPE_CHECKING
 
 from models import Base
-from enums import Experience, WorkFormat, EmploymentType, EmployeeRegistration
+from models.enums import (
+    Experience,
+    WorkFormat,
+    EmploymentType,
+    EmployeeRegistration,
+)
 
 if TYPE_CHECKING:
     from models.application import Application
