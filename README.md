@@ -11,13 +11,6 @@
   <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"/>
 </div>
 
-# Описание проекта
-
-
-
-### Логирование.
-
-### Версионирование.
 
 ## Запуск проекта посредством Docker.
 ### Клонировать репозиторий и перейти в него в командной строке.
